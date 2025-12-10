@@ -15,9 +15,12 @@
 // List status Error
 #define SLL_ERROR_EMPTY -20
 
-// Input Errora
+// Input Error
 #define SLL_ERROR_INVALID_POSITION -30
 #define SLL_ERROR_INVALID_ARGUMENT -31
+
+// General Error
+#define SLL_ERROR_NOT_FOUND -40
 
 struct node {
     int data;
@@ -61,5 +64,6 @@ int gsub(SLL_list *list, int old_value, int new_value);
 void print_list(SLL_list *list);
 int free_list(SLL_list **list_ref);
 bool is_empty(SLL_list *list);
+int index_of(SLL_list *list, int value);
 
 #endif

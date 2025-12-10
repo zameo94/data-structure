@@ -416,3 +416,30 @@ int sub(SLL_list *list, int old_value, int new_value) {
 int gsub(SLL_list *list, int old_value, int new_value) {
     return substitution(list, old_value, new_value, true);
 }
+
+/* SEARCH */
+
+int index_of(SLL_list *list, int value) {
+    if(list == NULL) {
+        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    }
+
+    if(is_empty(list)) {
+        return SLL_ERROR_EMPTY;
+    }
+
+    if(list->head->data == value) {
+        return 0;
+    }
+
+    int position = 1;
+    struct node *current_node = list->head->next; 
+
+    while(current_node != NULL) {
+        if(current_node->data == value) return position;
+        current_node = current_node->next;
+        position++;
+    }
+
+    return SLL_ERROR_NOT_FOUND;
+}
