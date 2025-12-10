@@ -254,7 +254,7 @@ bool is_empty(SLL_list *list) {
         return false;
     }
 
-    return (list->length == 0);
+    return (list->head == NULL);
 }
 
 /* GET AT SPECIFIC POSITION */
@@ -323,6 +323,102 @@ int get_tail(SLL_list *list, int *output) {
     }
 
     *output = list->tail->data;
+
+    return SLL_SUCCESS;
+}
+
+/* SUBSTITUTION */
+int sub_head(SLL_list *list, int new_value) {
+    if(list == NULL) {
+        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    }
+
+    if(is_empty(list)) {
+        return SLL_ERROR_EMPTY;
+    }
+
+    list->head->data = new_value;
+
+    return SLL_SUCCESS;
+}
+
+int sub_at(SLL_list *list, int position, int new_value) {
+    if(list == NULL) {
+        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    }
+
+    if(position < 0) {
+        return SLL_ERROR_INVALID_POSITION;
+    }
+
+    if(position >= list->length) {
+        return SLL_ERROR_INVALID_POSITION;
+    }
+
+    if(position == 0) {
+        return sub_head(list, new_value);
+    }
+
+    if(position == (list->length - 1)) {
+        return sub_tail(list, new_value);
+    }
+
+    struct node *current_node = list->head->next;
+
+    for(int i = 1; i < position; i++) {
+        current_node = current_node->next;
+    }
+
+    current_node->data = new_value;
+
+    return SLL_SUCCESS;
+}
+
+int sub_tail(SLL_list *list, int new_value) {
+    if(list == NULL) {
+        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    }
+
+    if(is_empty(list)) {
+        return SLL_ERROR_EMPTY;
+    }
+
+    list->tail->data = new_value;
+
+    return SLL_SUCCESS;
+}
+
+int sub(SLL_list *list, int old_value, int new_value) {
+    if(list == NULL) {
+        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    }
+
+    struct node *current_node = list->head;
+
+    for(int i = 0; i < list->length; i++) {
+        if(current_node->data == old_value) {
+            current_node->data = new_value;
+            break;
+        }
+        current_node = current_node->next;
+    }
+
+    return SLL_SUCCESS;
+}
+
+int gsub(SLL_list *list, int old_value, int new_value) {
+    if(list == NULL) {
+        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    }
+
+    struct node *current_node = list->head;
+
+    for(int i = 0; i < list->length; i++) {
+        if(current_node->data == old_value) {
+            current_node->data = new_value;
+        }
+        current_node = current_node->next;
+    }
 
     return SLL_SUCCESS;
 }

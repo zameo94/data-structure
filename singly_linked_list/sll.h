@@ -44,14 +44,20 @@ int delete_head(SLL_list *list);
 int delete_at(SLL_list *list, int position);
 int delete_tail(SLL_list *list);
 
-// Get/Query
-bool is_empty(SLL_list *list);
+// Get
 int get_head(SLL_list *list, int *output);
 int get_at(SLL_list *list, int position, int *output);
 int get_tail(SLL_list *list, int *output);
 
+// Substitution
+int sub_head(SLL_list *list, int new_value);
+int sub_at(SLL_list *list, int position, int new_value);
+int sub_tail(SLL_list *list, int new_value);
+int sub(SLL_list *list, int old_value, int new_value);
+
 // Utility
 void print_list(SLL_list *list);
 int free_list(SLL_list **list_ref);
+bool is_empty(SLL_list *list);
 
 #endif
