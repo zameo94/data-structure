@@ -65,5 +65,6 @@ void print_list(SLL_list *list);
 int free_list(SLL_list **list_ref);
 bool is_empty(SLL_list *list);
 int index_of(SLL_list *list, int value);
+int reverse_list(SLL_list *list);
 
 #endif

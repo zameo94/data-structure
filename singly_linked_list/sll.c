@@ -328,6 +328,7 @@ int get_tail(SLL_list *list, int *output) {
 }
 
 /* SUBSTITUTION */
+
 int sub_head(SLL_list *list, int new_value) {
     if(list == NULL) {
         return SLL_ERROR_LIST_NOT_ALLOCATED;
@@ -442,4 +443,37 @@ int index_of(SLL_list *list, int value) {
     }
 
     return SLL_ERROR_NOT_FOUND;
+}
+
+/* REVERSE */
+
+int reverse_list(SLL_list *list) {
+    if(list == NULL) {
+        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    }
+
+    if(is_empty(list)) {
+        return SLL_ERROR_EMPTY;
+    }
+
+    if(list->length == 1) {
+        return SLL_SUCCESS;
+    }
+
+    struct node *prev = NULL;
+    struct node *current = list->head;
+    struct node *next = NULL;
+
+    list->tail = list->head;
+
+    while(current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+
+    list->head = prev;
+
+    return SLL_SUCCESS;
 }
