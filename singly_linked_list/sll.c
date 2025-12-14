@@ -331,6 +331,16 @@ bool is_empty(SLL_list *list) {
     return (list->head == NULL);
 }
 
+bool is_present(SLL_list *list, int value) {
+    int result = index_of(list, value);
+
+    return (
+        result != SLL_ERROR_NOT_FOUND &&
+        result != SLL_ERROR_LIST_NOT_ALLOCATED &&
+        result != SLL_ERROR_EMPTY
+    );
+}
+
 /* GET AT SPECIFIC POSITION */
 
 int get_head(SLL_list *list, int *output) {
