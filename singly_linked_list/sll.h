@@ -46,6 +46,9 @@ int insert_tail(SLL_list *list, int data);
 int delete_head(SLL_list *list);
 int delete_at(SLL_list *list, int position);
 int delete_tail(SLL_list *list);
+int delete_value(SLL_list *list, int value, bool deleta_all);
+int delete_single_value(SLL_list *list, int value);
+int delete_all_value(SLL_list *list, int value);
 
 // Get
 int get_head(SLL_list *list, int *output);
@@ -66,5 +69,6 @@ int free_list(SLL_list **list_ref);
 bool is_empty(SLL_list *list);
 int index_of(SLL_list *list, int value);
 int reverse_list(SLL_list *list);
+int clear_list(SLL_list *list);
 
 #endif

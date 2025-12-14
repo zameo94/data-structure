@@ -206,6 +206,59 @@ int delete_tail(SLL_list *list) {
     return SLL_SUCCESS; 
 }
 
+int delete_value(SLL_list *list, int value, bool delete_all) {
+    if(list == NULL) {
+        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    }
+
+    if(is_empty(list)) {
+        return SLL_ERROR_EMPTY;
+    }
+
+    struct node *prev = NULL;
+    struct node *current = list->head;
+    struct node *next = NULL;
+
+    while(current != NULL) {
+        next = current->next;
+
+        if(current->data == value) {
+            struct node *node_to_delete = current;
+
+            if(list->head == node_to_delete) {
+                list->head = list->head->next;
+            } else {
+                prev->next = node_to_delete->next;
+            }
+
+            if(list->tail == node_to_delete) {
+                list->tail = prev;
+            }
+
+            free(node_to_delete);
+            list->length--;
+
+            if(!delete_all) {
+                break;
+            }
+        } else {
+            prev = current;
+        }
+
+        current = next;
+    }
+
+    return SLL_SUCCESS;
+}
+
+int delete_single_value(SLL_list *list, int value) {
+    return delete_value(list, value, false);
+}
+
+int delete_all_value(SLL_list *list, int value) {
+    return delete_value(list, value, true);
+}
+
 /* PRINTING */
 
 void print_list(SLL_list *list) {
@@ -223,7 +276,7 @@ void print_list(SLL_list *list) {
     printf("NULL\n");
 }
 
-/* FREE FUNCTIONS */
+/* CLEANING FUNCTIONS */
 
 int free_list(SLL_list **list_ref) {
     if(*list_ref == NULL) {
@@ -243,6 +296,27 @@ int free_list(SLL_list **list_ref) {
 
     free(list);
     *list_ref = NULL;
+
+    return SLL_SUCCESS;
+}
+
+int clear_list(SLL_list *list) {
+    if(list == NULL) {
+        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    }
+
+    struct node *current = list->head;
+    struct node *next = current->next;
+
+    while(current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+
+    list->head = NULL;
+    list->tail = NULL;
+    list->length = 0;
 
     return SLL_SUCCESS;
 }
