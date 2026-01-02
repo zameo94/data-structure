@@ -5,8 +5,6 @@
 This project is a hobby implementation of fundamental data structures in C.  
 The primary goal is to practice and deepen understanding of how common data structures are built and operate at a low level.
 
-Currently, the repository includes an implementation of a **singly linked list**.
-
 ## Features
 
 - Written in pure C for maximal portability
@@ -15,12 +13,12 @@ Currently, the repository includes an implementation of a **singly linked list**
 ## Status
 
 - **Active**: Adding new data structures as time allows
-- **Implemented so far:** Singly linked list
+- **Implemented so far:**
+  * Singly linked list
 
 ## Future Plans
 
 - Add more data structures (e.g., stacks, queues, trees, etc.)
-- Include usage examples and tests
 
 ## Why?
 
