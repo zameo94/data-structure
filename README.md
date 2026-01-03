@@ -19,6 +19,7 @@ The primary goal is to practice and deepen understanding of how common data stru
 - **Active**: Adding new algorithms as time allows
 - **Implemented so far:**
   * Linear search
+  * Bubble sort
 
 ## Future Plans
 
