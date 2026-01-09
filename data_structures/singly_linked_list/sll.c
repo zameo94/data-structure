@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
 
 /* INITIALIZATION */
 
@@ -323,10 +324,13 @@ int clear_list(SLL_list *list) {
 
 /* BOOLEAN CHECKS */
 
+/* 
+ * Check if the list is empty.
+ * The pointer 'list' MUST be allocated. Passing NULL is considered 
+ * a logic error and will trigger an assertion failure.
+ */
 bool is_empty(SLL_list *list) {
-    if(list == NULL) {
-        return false;
-    }
+    assert(list != NULL);
 
     return (list->head == NULL);
 }
