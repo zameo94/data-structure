@@ -16,6 +16,7 @@ The primary goal is to practice and deepen understanding of how common data stru
 - **Implemented so far:**
   * Singly linked list
   * SLL Stack
+  * SLL Queue
 
 - **Active**: Adding new algorithms as time allows
 - **Implemented so far:**
