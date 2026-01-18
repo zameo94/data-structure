@@ -15,6 +15,7 @@ The primary goal is to practice and deepen understanding of how common data stru
 - **Active**: Adding new data structures as time allows
 - **Implemented so far:**
   * Singly linked list
+  * SLL Stack
 
 - **Active**: Adding new algorithms as time allows
 - **Implemented so far:**
