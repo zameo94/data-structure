@@ -1,15 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-
-// Setup Errors code
-#define ERROR_ARRAY_NOT_ALLOCATED -11
-
-// Input Error
-#define ERROR_INVALID_LENGTH -30
-
-// Success code
-#define SUCCESS 0
+#include "merge_sort.h"
 
 static void private_merge(int *array, size_t left, size_t medium, size_t right) {
     assert(array != NULL);
@@ -77,33 +66,4 @@ int merge_sort(int *array, size_t len) {
     private_merge_sort(array, 0, len - 1);
 
     return SUCCESS;
-}
-
-int main(void) {
-    int my_array[] = { 65, 6, 3, 9, 32, 10 };
-    size_t len = sizeof(my_array) / sizeof(my_array[0]);
-
-    printf("Array before sorting:\n");
-
-    for(size_t i = 0; i < len; i++) {
-        printf("%d ", my_array[i]);
-    }
-    printf("\n");
-
-    int result = merge_sort(my_array, len);
-
-    if(result == ERROR_ARRAY_NOT_ALLOCATED) {
-        printf("Error: Invalid array.\n");
-    } else if(result == ERROR_INVALID_LENGTH) {
-        printf("Error: Invalid array length.\n");
-    } else if(result == SUCCESS) {
-        printf("Array sorted:\n");
-
-        for(size_t i = 0; i < len; i++) {
-            printf("%d ", my_array[i]);
-        }
-        printf("\n");
-    }
-
-    return 0;
 }
