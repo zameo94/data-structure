@@ -14,7 +14,6 @@
 */
 ssize_t linear_search(const int *array, size_t len, int x) {
     if(array == NULL) return ERROR_ARRAY_NOT_ALLOCATED;
-
     if(len < 1) return ERROR_INVALID_LENGTH;
 
     for(size_t i = 0; i < len; i++) {

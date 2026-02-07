@@ -21,7 +21,6 @@ static void swap_values(int *x, int *y) {
 */
 int bubble_sort(int *array, size_t len) {
     if(array == NULL) return ERROR_ARRAY_NOT_ALLOCATED;
-
     if(len < 2) return SUCCESS;
 
     for(size_t i = 0; i < len; i++) {
