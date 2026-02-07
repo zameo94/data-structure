@@ -22,6 +22,7 @@ The primary goal is to practice and deepen understanding of how common data stru
 - **Implemented so far:**
   * Linear search
   * Bubble sort
+  * Merge sort
 
 ## Future Plans
 
