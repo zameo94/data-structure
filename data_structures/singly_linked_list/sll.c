@@ -682,23 +682,3 @@ int duplicate_list(SLL_list *original_list, SLL_list *new_list) {
 int length_list(const SLL_list *list) {
     return list->length;
 }
-
-void verify_tail(SLL_list *list) {
-    if (list->head == NULL) {
-        printf("Tail check: List is empty, tail should be NULL: %s\n", 
-               list->tail == NULL ? "PASSED" : "FAILED");
-        return;
-    }
-
-    struct node *current = list->head;
-    while (current->next != NULL) {
-        current = current->next;
-    }
-
-    if (list->tail == current) {
-        printf("Tail check: list->tail correctly points to %d: PASSED\n", current->data);
-    } else {
-        printf("Tail check: FAILED! list->tail points to %d but should point to %d\n", 
-               list->tail ? list->tail->data : -1, current->data);
-    }
-}
