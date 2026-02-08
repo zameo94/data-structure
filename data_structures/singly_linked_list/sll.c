@@ -526,42 +526,74 @@ int index_of(SLL_list *list, int value) {
     return SLL_ERROR_NOT_FOUND;
 }
 
-/* SORT */
+/* SORT (Merge Sort) */
 
-static void swap_values(struct node *a, struct node *b) {
-    int tmp = a->data;
-    a->data = b->data;
-    b->data = tmp; 
+static struct node *private_merge(struct node *left, struct node *right) {
+    struct node dummy;
+    struct node *current = &dummy;
+
+    while(left != NULL && right != NULL) {
+        if(left->data <= right->data) {
+            current->next = left;
+            current = current->next;
+            left = left->next;
+        } else {
+            current->next = right;
+            current = current->next;
+            right = right->next;
+        }
+    }
+
+    if(left != NULL) {
+        current->next = left;
+    } else {
+        current->next = right;
+    }
+
+    return dummy.next;
+}
+
+static struct node *split_list(struct node *head) {
+    // Tortoise and Hare approach to split the list
+    struct node *slow = head;
+    struct node *fast = slow->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    struct node *right = slow->next;
+    slow->next = NULL;
+
+    return right;
+}
+
+static struct node *merge_sort(struct node *head) {
+    if(head == NULL || head->next == NULL) return head;
+
+    struct node *left = head;
+    struct node *right = split_list(head);
+
+    left = merge_sort(left);
+    right = merge_sort(right);
+
+    return private_merge(left, right);
 }
 
 int sort_list(SLL_list *list) {
-    if(list == NULL) {
-        return SLL_ERROR_LIST_NOT_ALLOCATED;
+    if(list == NULL) return SLL_ERROR_LIST_NOT_ALLOCATED;
+    if(list->length < 2) return SLL_SUCCESS;
+
+    list->head = merge_sort(list->head);
+
+    struct node *current = list->head;
+
+    while(current->next != NULL){
+        current = current->next;
     }
 
-    if(list->length < 2) {
-        return SLL_SUCCESS;
-    }
-
-    struct node *current;
-    struct node *last_sorted = NULL;
-    bool swapped;
-
-    do {
-        swapped = false;
-        current = list->head;
-
-        while(current->next != last_sorted) {
-            if(current->data > current->next->data) {
-                swap_values(current, current->next);
-                swapped = true;
-            }
-
-            current = current->next;
-        }
-
-        last_sorted = current;
-    } while(swapped);
+    list->tail = current;
 
     return SLL_SUCCESS;
 }
@@ -649,4 +681,24 @@ int duplicate_list(SLL_list *original_list, SLL_list *new_list) {
 
 int length_list(const SLL_list *list) {
     return list->length;
+}
+
+void verify_tail(SLL_list *list) {
+    if (list->head == NULL) {
+        printf("Tail check: List is empty, tail should be NULL: %s\n", 
+               list->tail == NULL ? "PASSED" : "FAILED");
+        return;
+    }
+
+    struct node *current = list->head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    if (list->tail == current) {
+        printf("Tail check: list->tail correctly points to %d: PASSED\n", current->data);
+    } else {
+        printf("Tail check: FAILED! list->tail points to %d but should point to %d\n", 
+               list->tail ? list->tail->data : -1, current->data);
+    }
 }
