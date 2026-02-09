@@ -23,6 +23,7 @@ The primary goal is to practice and deepen understanding of how common data stru
   * Linear search
   * Bubble sort
   * Merge sort
+  * Quick sort
 
 ## Future Plans
 
