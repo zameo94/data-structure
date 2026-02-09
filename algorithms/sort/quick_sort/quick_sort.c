@@ -38,6 +38,8 @@ static void private_quick_sort(int *array, int low, int high) {
 int quick_sort(int *array, size_t len) {
     if(array == NULL) return ERROR_ARRAY_NOT_ALLOCATED;
     if(len < 2) return SUCCESS;
+
+    // Compatibility with test_sort.c
     len = (int)len;
 
     private_quick_sort(array, 0, len - 1);
