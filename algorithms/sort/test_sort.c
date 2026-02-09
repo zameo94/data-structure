@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "merge_sort/merge_sort.h"
 #include "bubble_sort/bubble_sort.h"
+#include "quick_sort/quick_sort.h"
 
 // Setup Errors code
 #define ERROR_ARRAY_NOT_ALLOCATED -11
@@ -40,10 +41,12 @@ void test_algorithm(int *array, size_t len, char *alg_type, sort_func_t sort_fun
 int main(void) {
     int buble_sort_array[] = { 65, 6, 3, 9, 32, 10 };
     int merge_sort_array[] = { 65, 6, 3, 9, 32, 10 };
+    int quick_sort_array[] = { 10, 20, 5, 8, 30, 15 };
     size_t len = sizeof(buble_sort_array) / sizeof(buble_sort_array[0]);
 
     test_algorithm(buble_sort_array, len, "Bubble Sort", bubble_sort);
     test_algorithm(merge_sort_array, len, "Merge Sort", merge_sort);
+    test_algorithm(quick_sort_array, len, "Quick Sort", quick_sort);
 
     return 0;
 }
